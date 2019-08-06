@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #EEA5E9;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+input[type=text] {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+input[type=radio] {
+   margin-top: -1px;
+   width: 40px;
+   height: 20px;
+   vertical-align: middle;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #0D33CB;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+#hide,#hide1,#hide2,#hide3,#hide4,#hide5,#hide6,#hide7,#hide8,#hide9,#hide10,#hide11,#hide12,#hide13,#hide14,#hide15,#hide16,#hide17,#hide18,#hide19,#hide20,#hide21,#hide22,#hide23,#hide24,#hide25,#hide26 {
+  display: none;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #0D9ACB;
+}
+
+
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #0AF426;
+}
+</style>
+<body>
+
+<form id="regForm" action="{% url 'mainsurvey:page2' %}" method="POST">
+  {% csrf_token %}
+  <h1 align="left" >Survey</h1>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab">
+    <p align="left">for Research purpose</p>
+    <p align="left"><font color="red">*Required</font></p>
+    <div id="error" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">If you agree, Kindly select Yes<font color="red"> *</font></p>
+    <input type="radio" id="rad1" name="rad" oninput="this.className = ''" value="Yes" required>Yes <br><br>
+    <input type="radio" id="rad2" name="rad" oninput="this.className = ''" value="No" required>No
+    <p id="hide"><font color="red">This is a required question</font></p>
+    </div>
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Basic Info:</p> <br>
+    <p style="font-size:20px;font-weight:bold">Name : (If you wish to share)</p>
+    <input type="text" name="name" oninput="this.className = ''" >
+    <div id="error1" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Student Gender<font color="red"> *</font></p>
+    <input type="radio" name="gender" oninput="this.className = ''" value="Female" required>Female <br><br>
+    <input type="radio" name="gender" oninput="this.className = ''" value="Male" required>Male <br><br>
+    <input type="radio" name="gender" oninput="this.className = ''" value="Prefer not to say" required>Prefer not to say <br><br>
+    <p id="hide1"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error2" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Nationality<font color="red"> *</font></p>
+    <input type="radio" name="nat" oninput="this.className = ''" value="India" required>India <br><br>
+    <input type="radio" name="nat" oninput="this.className = ''" value="Srilanka" required>Srilanka <br><br>
+    <input type="radio" name="nat" oninput="this.className = ''" value="Nepal" required>Nepal <br><br>
+    <input type="radio" name="nat" oninput="this.className = ''" value="__other_option__" required>Other:<br><br>
+    <input type="text" name="nat" oninput="this.className = ''" placeholder="custom value"><br><br>
+    <p id="hide2"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error3" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Location / Residing city<font color="red"> *</font></p>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Bengalore" required>Bengalore <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Chennai" required>Chennai <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Delhi" required>Delhi <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Kolkata" required>Kolkata <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Mumbai" required>Mumbai <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Other Urban Areas" required>Other Urban Areas <br><br>
+    <input type="radio" name="loc" oninput="this.className = ''" value="Other Rural Areas" required>Other Rural Areas <br><br>
+    <p id="hide3"><font color="red">This is a required question</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold;width:160px;height:35px">Student/Child Date of Birth<font color="red"> *</font></p>
+    <input type="date" name="dob" id="dob1" oninput="this.className = ''" required><br><br>
+    <div id="error4" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Family Size<font color="red"> *</font></p>
+    <p style="padding-left: 148px;"><label for="1">1&emsp;&emsp;&ensp;  </label>
+    <label for="2">2&emsp;&emsp;&ensp;</label>
+    <label for="3">3&emsp;&emsp;&ensp;</label>
+    <label for="4">4&emsp;&ensp;&ensp;</label>
+    <label for="5">5&emsp;&ensp;&ensp;</label>
+    <label for="6"> 6&emsp;&emsp;&emsp;</label>
+    <label for="7">7&emsp;&emsp;&ensp;</label></p>
+    <p> Father + Mother +
+    <input type="radio" id="1" name="fam_no" oninput="this.className = ''" value="1" required>
+    <input type="radio" id="2" name="fam_no" oninput="this.className = ''" value="2" required>
+    <input type="radio" id="3" name="fam_no" oninput="this.className = ''" value="3" required>
+    <input type="radio" id="4" name="fam_no" oninput="this.className = ''" value="4" required>
+    <input type="radio" id="5" name="fam_no" oninput="this.className = ''" value="5" required>
+    <input type="radio" id="6" name="fam_no" oninput="this.className = ''" value="6" required>
+    <input type="radio" id="7" name="fam_no" oninput="this.className = ''" value="7" required></p><br><br>
+    <p id="hide4"><font color="red">This is a required question</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold">Mother&#x27;s Educational status :</p>
+    <select name="mot_edu" oninput="this.className = ''" style="width:160px;height:35px" >
+      <option value="Select">----Select----</option>
+      <option value="Post Graduation">Post Graduation</option>
+      <option value="Technical Education">Technical Education</option>
+      <option value="Under Graduation">Under Graduation</option>
+      <option value="Profession">Profession</option>
+      <option value="Others">Others</option>
+    </select><br><br>
+    <div id="error5" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Father&#x27;s Educational status:<font color="red"> *</font></p>
+    <select id="fat_edu1" name="fat_edu" oninput="this.className = ''" style="width:160px;height:35px">
+      <option value="Select">----Select----</option>
+      <option value="Technical Education">Technical Education</option>
+      <option value="Under Graduation">Under Graduation</option>
+      <option value="Post Graduation">Post Graduation</option>
+      <option value="Professionals">Professionals</option>
+      <option value="Others">Others</option>
+    </select><br><br>
+    <p id="hide5"><font color="red">This is a required question</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold">Mother&#x27;s Job :</p>
+    <select name="mot_job" oninput="this.className = ''" style="width:160px;height:35px">
+      <option value="Select">----Select----</option>
+      <option value="House Wife">House Wife</option>
+      <option value="Working">Working</option>
+      <option value="Enterprenur">Enterprenur</option>
+      <option value="Others">Others</option>
+    </select><br><br>
+    <div id="error6" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Father&#x27;s Job :<font color="red"> *</font></p>
+    <select id="fat_job1" name="fat_job" oninput="this.className = ''" style="width:160px;height:35px">
+      <option value="Select">----Select----</option>
+      <option value="Working">Working</option>
+      <option value="Enterprenur">Enterprenur</option>
+      <option value="Unemployed">Unemployed</option>
+      <option value="Others">Others</option>
+    </select>
+    <p id="hide6"><font color="red">This is a required question</font></p>
+    </div>
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">School information</p><br>
+    <div id="error7" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">School Name<font color="red"> *</font></p>
+    <input type="text" id="school1" name="school" oninput="this.className = ''" required>
+    <p id="hide7"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error25" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Reason for selecting this School<font color="red"> *</font></p>
+    <textarea rows="4" cols="90" id="reason1" name="reason" oninput="this.className = ''" required></textarea>
+    <p id="hide25"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error8" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Academic Year*</p>
+    <input type="radio" name="acd" oninput="this.className = ''" value="AY15-16" required>AY15-16 <br><br>
+     <input type="radio" name="acd" oninput="this.className = ''" value="AY16-17" required>AY16-17 <br><br>
+     <input type="radio" name="acd" oninput="this.className = ''" value="AY17-18" required>AY17-18 <br><br>
+     <input type="radio" name="acd" oninput="this.className = ''" value="AY18-19" required>AY18-19 <br><br>
+     <input type="radio" name="acd" oninput="this.className = ''" value="AY19-20" required>AY19-20 <br><br>
+     <input type="radio" name="acd" oninput="this.className = ''" value="__other_option__" required> <br><br>
+     <input type="text" name="acd1" oninput="this.className = ''" placeholder="custom value"><br><br>
+     <p id="hide8"><font color="red">This is a required question</font></p>
+     </div>
+     <p style="font-size:20px;font-weight:bold">Are you getting Educational Support from School?</p>
+     <input type="radio" name="edu_sp" value="Yes" >Yes <br><br>
+     <input type="radio" name="edu_sp" value="No" >No <br><br>
+     <p style="font-size:20px;font-weight:bold">Are you providing/getting family support for education?</p>
+     <input type="radio" name="fam_sp" value="Yes" >Yes <br><br>
+     <input type="radio" name="fam_sp" value="No" >No <br><br>
+     <div id="error9" style="padding:10px">
+     <p style="font-size:20px;font-weight:bold">Which Standard or Grade ?<font color="red"> *</font></p>
+     <select id="stand1" name="stand" oninput="this.className = ''" style="width:160px;height:35px">
+      <option value="Select">----Select----</option>
+      <option value="PKG">PKG</option>
+      <option value="LKG">LKG</option>
+      <option value="UKG">UKG</option>
+      <option value="1st Grade">1st Grade</option>
+      <option value="2nd Grade">2nd Grade</option>
+      <option value="3rd Grade">3rd Grade</option>
+      <option value="4th Grade">4th Grade</option>
+      <option value="5th Grade">5th Grade</option>
+      <option value="6th Grade">6th Grade</option>
+      <option value="7th Grade">7th Grade</option>
+      <option value="8th Grade">8th Grade</option>
+      <option value="9th Grade">9th Grade</option>
+      <option value="10th Grade">10th Grade</option>
+      <option value="11th Grade">11th Grade</option>
+      <option value="12th Grade">12th Grade</option>
+    </select><br><br>
+    <p id="hide9"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error10" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">What would you like to predict ?<font color="red"> *</font></p><br>
+      <input type="radio" id="pred1" name="pred" oninput="this.className = ''" value="Academic Performance" required>Academic Performance <br><br>
+      <input type="radio" id="pred2" name="pred" oninput="this.className = ''" value="Sports &amp; Performing Arts." required>Sports &amp; Performing Arts. <br><br>
+      <p id="hide10"><font color="red">This is a required question</font></p>
+      </div>
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Select Program</p>
+    <div id="error11" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Provide Term or Semester Details: (ex. Term 1 or 1st Sem)<font color="red"> *</font></p>
+    <input type="radio" id="sem_det1" name="sem_det" oninput="this.className = ''" value="Term1" required>Term1 <br><br>
+    <input type="radio" id="sem_det2" name="sem_det" oninput="this.className = ''" value="Term2" required>Term2 <br><br>
+    <input type="radio" id="sem_det3" name="sem_det" oninput="this.className = ''" value="Term3" required>Term3 <br><br>
+    <input type="radio" id="sem_det4" name="sem_det" oninput="this.className = ''" value="Semester 1" required>Semester1 <br><br>
+    <input type="radio" id="sem_det5" name="sem_det" oninput="this.className = ''" value="Semester2" required>Semester2 <br><br>
+    <p id="hide11"><font color="red">This is a required question</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold">Which Class/program you Child studying ?</p>
+    <input type="radio" id="class_stu1" name="class_stu" oninput="this.className = ''" value="Kinder Garden" >Kinder Garden <br><br>
+    <input type="radio" id="class_stu2" name="class_stu" oninput="this.className = ''" value="Primary" >Primary <br><br>
+    <input type="radio" id="class_stu3" name="class_stu" oninput="this.className = ''" value="Middle School" >Middle School <br><br>
+    <input type="radio" id="class_stu4" name="class_stu" oninput="this.className = ''" value="Secondary" >Secondary <br><br>
+    <input type="radio" id="class_stu5" name="class_stu" oninput="this.className = ''" value="Higher Secondary" >Higher Secondary <br><br>
+    <input type="radio" id="class_stu6" name="class_stu" oninput="this.className = ''" value="__other_option__" ><br><br>
+    <input type="text" name="class_stu" oninput="this.className = ''" placeholder="custom value">
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Kinder Garden</p><br>
+    <p style="font-size:20px;font-weight:bold">English</p>
+    <input id="eng1" type="text" name="eng" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Maths</p>
+    <input id="mat1" type="text" name="mat" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Concept</p>
+    <input id="concept1" type="text" name="concept" oninput="this.className = ''" >
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Primary/Middle/Secondary &amp; Hr. Secondary</p><br>
+    <div id="error12" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Enter English Language  Grade or Marks (Eng I)<font color="red"> *</font></p>
+    <textarea id="eng1_marks1" name="eng1_marks" oninput="this.className = ''" required></textarea><br>
+    <p id="hide12"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error13" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Enter English Literature Grade or Marks (Eng II)<font color="red"> *</font></p>
+    <input id="eng2_marks1" type="text" name="eng2_marks" oninput="this.className = ''" required><br>
+    <p id="hide13"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error14" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Enter Maths Grade or Marks ( Math I)<font color="red"> *</font></p>
+    <input id="mat_marks1" type="text" name="mat_marks" oninput="this.className = ''" required><br>
+    <p id="hide14"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error15" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Enter Social Studies Grade or Marks<font color="red"> *</font></p>
+    <input id="soc_marks1" type="text" name="soc_marks" oninput="this.className = ''" required>
+    <p id="hide15"><font color="red">This is a required question</font></p>
+    </div>
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Academic Related</p>
+    <div id="error16" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Would like to add other Subjects ? which not described in previous menu&#x27;s<font color="red"> *</font></p>
+    <input type="radio" id="add1" name="add" value="Yes" >Yes <br><br>
+    <input type="radio" id="add2" name="add" value="No" >No
+    <p id="hide16"><font color="red">This is a required question</font></p>
+    </div>
+</div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Multiple Subjects Entry</p><br>
+    <p style="font-size:20px;font-weight:bold">Enter Science Grade or Marks</p>
+    <input type="text" name="science" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Enter Social Science Grade or Marks</p>
+    <input type="text" name="soci" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Provide your Second Language Name  and continue to input your marks</p>
+    <input type="text" name="sec_lang" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Enter Your Second Language 1 Grade or Marks</p>
+    <input type="text" name="sec_lang_marks1" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Enter Your Second Language II Grade or Marks</p>
+    <input type="text" name="sec_lang_marks2" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Enter Maths Grade or Marks ( Math II)</p>
+    <input type="text" name="math_marks" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Enter Computer Grade or Marks</p>
+    <input type="text" name="comp_marks" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Any other Subject Name 1</p>
+    <input type="text" name="oth_sub1" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Grade or Mark - 1?</p>
+    <input type="text" name="oth_sub_marks1" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Any other Subject Name 2</p>
+    <input type="text" name="oth_sub2" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Grade or Mark -2</p>
+    <input type="text" name="oth_sub_marks2" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Any other Subject Name 3</p>
+    <input type="text" name="oth_sub3" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Grade or Mark -3</p>
+    <input type="text" name="oth_sub_marks3" oninput="this.className = ''" >
+  </div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Student Behaviour</p><br>
+    <p style="font-size:20px;font-weight:bold">Mention how many number of times the child raises hand to answer during the class hours?</p>
+    <input id="num_1" type="number" name="num1" oninput="this.className = ''" ><br>
+    <div id="error17" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Mention how many number of times your child looks for  contents related to the subject while browsing.<font color="red"> *</font></p>
+    <input id="num_2" type="number" name="num2" oninput="this.className = ''" ><br>
+    <p id="hide17"><font color="red">This is a required question</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold">Mention how many number of times your child has participated in group discussions in a week.</p>
+    <input id="num_3" type="number" name="num3" oninput="this.className = ''" >
+  </div>
+
+  <div class="tab">
+      <p align="left"><font color="red">*Required</font></p>
+      <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Student Personal</p>
+      <div id="error18" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">Student Health Status<font color="red"> *</font></p>
+      <input type="radio" name="health" value="Fall Sick Frequently" oninput="this.className = ''" required>Fall Sick Frequently<br><br>
+      <input type="radio" name="health" value="Healthy but Playful" oninput="this.className = ''" required>Healthy but Playful<br><br>
+      <input type="radio" name="health" value="Healthy but shy" oninput="this.className = ''" required>Healthy but shy<br><br>
+      <input type="radio" name="health" value="Moderate Health" oninput="this.className = ''" required>Moderate Health<br><br>
+      <input type="radio" name="health" value="Quiet or Calm type" oninput="this.className = ''" required>Quiet or Calm type<br><br>
+      <p id="hide18"><font color="red">This is a required question</font></p>
+      </div>
+      <p style="font-size:20px;font-weight:bold">Travel Time - Weekly  (Home to School)</p>
+      <input type="radio" name="travel" value="&lt; 15 mins" oninput="this.className = ''">&lt; 15 mins<br><br>
+      <input type="radio" name="travel" value="15 to 30 mins" oninput="this.className = ''">15 to 30 mins<br><br>
+      <input type="radio" name="travel" value="45 to 60 mins" oninput="this.className = ''">45 to 60 mins<br><br>
+      <input type="radio" name="travel" value="30 to 45 mins" oninput="this.className = ''">30 to 45 mins<br><br>
+      <input type="radio" name="travel" value="&gt; 1 Hour" oninput="this.className = ''">&gt; 1 Hour<br><br>
+      <div id="error19" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">Study time -  Weekly<font color="red"> *</font></p>
+      <input type="radio" name="study_time" value="&lt; 2 Hours" oninput="this.className = ''" required>&lt; 2 Hours<br><br>
+      <input type="radio" name="study_time" value="2 to 4 Hours" oninput="this.className = ''" required>2 to 4 Hours<br><br>
+      <input type="radio" name="study_time" value="5 to 10 Hours" oninput="this.className = ''" required>5 to 10 Hours<br><br>
+      <input type="radio" name="study_time" value="&gt; 10 Hours" oninput="this.className = ''" required>&gt; 10 Hours<br><br>
+      <p id="hide19"><font color="red">This is a required question</font></p>
+      </div>
+      <p style="font-size:20px;font-weight:bold">Does Kids have  free or leisure time</p>
+      <input type="radio" name="free_time" oninput="this.className = ''" value="Yes" >Yes<br><br>
+      <input type="radio" name="free_time" oninput="this.className = ''" value="No" >No<br><br>
+      <div id="error20" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">Does the Kid go out on a day for Playing/studying?<font color="red"> *</font></p>
+      <input type="radio" name="play" oninput="this.className = ''" value="Yes" >Yes<br><br>
+      <input type="radio" name="play" oninput="this.className = ''" value="No" >No<br><br>
+      <p id="hide20"><font color="red">This is a required question</font></p>
+      </div>
+      <div id="error21" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">How many days the kid  skip the school in a month?<font color="red"> *</font></p>
+      <input type="radio" name="skip" value="0" oninput="this.className = ''" required>0<br><br>
+      <input type="radio" name="skip" value="1" oninput="this.className = ''" required>1<br><br>
+      <input type="radio" name="skip" value="2" oninput="this.className = ''" required>2<br><br>
+      <input type="radio" name="skip" value="3" oninput="this.className = ''" required>3<br><br>
+      <input type="radio" name="skip" value="4" oninput="this.className = ''" required>4<br><br>
+      <input type="radio" name="skip" value="5" oninput="this.className = ''" required>5<br><br>
+      <p id="hide21"><font color="red">This is a required question</font></p>
+      </div>
+      <div id="error22" style="padding:10px">
+      <p style="font-size:20px;font-weight:bold">Does the  kid  participate in  any  extracurricular activities ?<font color="red"> *</font></p>
+      <input id="extra_cur" type="text" name="extra" oninput="this.className = ''" required>
+      <p id="hide22"><font color="red">This is a required question</font></p>
+      </div>
+</div>
+
+  <div class="tab">
+    <p align="left"><font color="red">*Required</font></p>
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Sports &amp; extra Curricular activity Related</p><br>
+    <p style="font-size:20px;font-weight:bold">Provide Sport Activity that your kid interested?</p>
+    <input id="1478422888" type="text" name="spo" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">Provide Performing Activity that your kid Interested</p>
+    <input id="1478422888" type="text" name="per" oninput="this.className = ''" ><br>
+    <p style="font-size:20px;font-weight:bold">How much time he spend  for sport/performing activity ?</p>
+    <input type="radio" name="act_time" oninput="this.className = ''" value="Option 1" >Option 1<br><br>
+    <input type="radio" name="act_time" oninput="this.className = ''" value="__other_option__" ><br>
+    <input type="text" name="act_time" placeholder="custom value">
+  </div>
+
+  <div class="tab">
+    <p style="background-color:#9B260D;color:white;padding:12px;font-size:20px;font-weight:bold">Submit</p><br>
+    <div id="error23" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">Provide email address to share your student/Child progress<font color="red"> *</font></p>
+    <input id="email1" type="email" name="mail_id" oninput="this.className = ''" ><br>
+    <p id="hide23"><font color="red">This is a required question</font></p>
+    </div>
+    <div id="error24" style="padding:10px">
+    <p style="font-size:20px;font-weight:bold">What is the answer of 5 + 5 ?<font color="red"> *</font></p>
+    <input type="number" id="answer1" name="answer" value="">
+    <p id="hide24"><font color="red">This is a required question</font></p>
+    <p id="hide26"><font color="red">This is a wrong answer</font></p>
+    </div>
+    <p style="font-size:20px;font-weight:bold">Thanks for Submission</p>
+    <h3>We request you to forward it your friends and relatives who would like to predict their child or
+      student performance.  We will compute and let you  know over email once received enough data.</h3>
+  </div>
+
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+<script>
+
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+form_seq = [0,1,2,3,4,5,6,7,8,9,10,11];
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  // Increase or decrease the current tab by 1:
+/*  for(var m=0;m<form_seq.length,m++) {
+    if (form_seq[m] == currentTab) {
+      currentTab = form_seq[m+1];
+    }
+  }
+*/
+  var reftab = currentTab + n;
+  // if you have reached the end of the form...
+  if (reftab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  x[currentTab].style.display = "none";
+  currentTab = form_seq[form_seq.indexOf(currentTab)+n];
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+
+//  x = document.getElementsByClassName("tab");
+//  y = x[currentTab].getElementsByTagName("input");
+document.getElementById('hide').style.display = "none";
+document.getElementById('hide1').style.display = "none";
+document.getElementById('hide2').style.display = "none";
+document.getElementById('hide3').style.display = "none";
+document.getElementById('hide4').style.display = "none";
+document.getElementById('hide5').style.display = "none";
+document.getElementById('hide6').style.display = "none";
+document.getElementById('hide7').style.display = "none";
+document.getElementById('hide8').style.display = "none";
+document.getElementById('hide9').style.display = "none";
+document.getElementById('hide10').style.display = "none";
+document.getElementById('hide11').style.display = "none";
+document.getElementById('hide12').style.display = "none";
+document.getElementById('hide13').style.display = "none";
+document.getElementById('hide14').style.display = "none";
+document.getElementById('hide15').style.display = "none";
+document.getElementById('hide16').style.display = "none";
+document.getElementById('hide17').style.display = "none";
+document.getElementById('hide18').style.display = "none";
+document.getElementById('hide19').style.display = "none";
+document.getElementById('hide20').style.display = "none";
+document.getElementById('hide21').style.display = "none";
+document.getElementById('hide22').style.display = "none";
+document.getElementById('hide23').style.display = "none";
+document.getElementById('hide24').style.display = "none";
+document.getElementById('hide25').style.display = "none";
+document.getElementById('hide26').style.display = "none";
+document.getElementById('error').style.backgroundColor = "white";
+document.getElementById('error1').style.backgroundColor = "white";
+document.getElementById('error2').style.backgroundColor = "white";
+document.getElementById('error3').style.backgroundColor = "white";
+document.getElementById('error4').style.backgroundColor = "white";
+document.getElementById('error5').style.backgroundColor = "white";
+document.getElementById('error6').style.backgroundColor = "white";
+document.getElementById('error7').style.backgroundColor = "white";
+document.getElementById('error8').style.backgroundColor = "white";
+document.getElementById('error9').style.backgroundColor = "white";
+document.getElementById('error10').style.backgroundColor = "white";
+document.getElementById('error11').style.backgroundColor = "white";
+document.getElementById('error12').style.backgroundColor = "white";
+document.getElementById('error13').style.backgroundColor = "white";
+document.getElementById('error14').style.backgroundColor = "white";
+document.getElementById('error15').style.backgroundColor = "white";
+document.getElementById('error16').style.backgroundColor = "white";
+document.getElementById('error17').style.backgroundColor = "white";
+document.getElementById('error18').style.backgroundColor = "white";
+document.getElementById('error19').style.backgroundColor = "white";
+document.getElementById('error20').style.backgroundColor = "white";
+document.getElementById('error21').style.backgroundColor = "white";
+document.getElementById('error21').style.backgroundColor = "white";
+document.getElementById('error22').style.backgroundColor = "white";
+document.getElementById('error23').style.backgroundColor = "white";
+document.getElementById('error24').style.backgroundColor = "white";
+document.getElementById('error25').style.backgroundColor = "white";
+  if (currentTab == 0) {
+    var radios = document.getElementsByName("rad");
+    var formValid = false;
+    var i = 0;
+    while (!formValid && i < radios.length) {
+        if (radios[i].checked) formValid = true;
+        i++;
+    }
+
+    if (!formValid) {
+      document.getElementById('hide').style.display = "block";
+      document.getElementById('error').style.backgroundColor = "#ffdddd";
+    }
+    if (document.getElementById("rad1").checked) {
+    form_seq = [0,1,2,3,4,5,6,7,8,9,10,11];
+    }
+    if (document.getElementById("rad2").checked) {
+        form_seq = [0,11];
+    }
+
+    if (formValid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+
+    return formValid;
+  }
+
+  if (currentTab == 1) {
+    var valid = true;
+    var radios1 = document.getElementsByName("gender");
+    var formValid1 = false;
+    var i = 0;
+    while (!formValid1 && i < radios1.length) {
+        if (radios1[i].checked) formValid1 = true;
+        i++;
+      }
+    var radios2 = document.getElementsByName("nat");
+    var formValid2 = false;
+    var j = 0;
+    while (!formValid2 && j < radios2.length) {
+        if (radios2[j].checked) formValid2 = true;
+        j++;
+    }
+    var radios3 = document.getElementsByName("loc");
+    var formValid3 = false;
+    var k = 0;
+    while (!formValid3 && k < radios3.length) {
+        if (radios3[k].checked) formValid3 = true;
+        k++;
+    }
+    var radios5 = document.getElementsByName("fam_no");
+    var formValid5 = false;
+    var l = 0;
+    while (!formValid5 && l < radios5.length) {
+        if (radios5[l].checked) formValid5 = true;
+        l++;
+    }
+    var select1 = document.getElementById("fat_edu1");
+    var selectedval1 = select1.options[select1.selectedIndex].value;
+    var formValid6 = true;
+    if (selectedval1 == "Select") {
+      formValid6 = false;
+    }
+    var select2 = document.getElementById("fat_job1");
+    var formValid7 = true;
+    if (select2.value == 'Select') {
+      formValid7 = false;
+    }
+
+    if (formValid1 == false || formValid2 == false || formValid3 == false || formValid5 == false || formValid6 == false || formValid7 == false) {
+      valid = false;
+    }
+    if (!formValid1) {
+      document.getElementById('hide1').style.display = "block";
+      document.getElementById('error1').style.backgroundColor = "#ffdddd";
+    }
+    if (!formValid2) {
+      document.getElementById('hide2').style.display = "block";
+      document.getElementById('error2').style.backgroundColor = "#ffdddd";
+    }
+    if (!formValid3) {
+      document.getElementById('hide3').style.display = "block";
+      document.getElementById('error3').style.backgroundColor = "#ffdddd";
+    }
+    if (!formValid5) {
+      document.getElementById('hide4').style.display = "block";
+      document.getElementById('error4').style.backgroundColor = "#ffdddd";
+    }
+    if (!formValid6) {
+      document.getElementById('hide5').style.display = "block";
+      document.getElementById('error5').style.backgroundColor = "#ffdddd";
+    }
+    if (!formValid7) {
+      document.getElementById('hide6').style.display = "block";
+      document.getElementById('error6').style.backgroundColor = "#ffdddd";
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+
+    return valid;
+  }
+
+  if (currentTab == 2) {
+    var valid = true;
+    var text1 = document.getElementById("school1");
+    var formvalid1 = true;
+    if(text1.value == "" || text1.value.length == 0) {
+      formvalid1 = false;
+    }
+    var text2 = document.getElementById("reason1")
+    var formvalid2 = true;
+    if(text2.value == "" || text2.value.length == 0) {
+      formvalid2 = false;
+    }
+    var radios1 = document.getElementsByName("acd");
+    var formvalid3 = false;
+    var i = 0;
+    while (!formvalid3 && i < radios1.length) {
+        if (radios1[i].checked) formvalid3 = true;
+        i++;
+      }
+    var select1 = document.getElementById("stand1");
+    var selectedval1 = select1.options[select1.selectedIndex].value;
+    var formvalid4 = true;
+    if (selectedval1 == "Select") {
+      formvalid4 = false;
+    }
+    var radios2 = document.getElementsByName("pred");
+    var formvalid5 = false;
+    var j = 0;
+    while (!formvalid5 && j < radios2.length) {
+        if (radios2[j].checked) formvalid5 = true;
+        j++;
+    }
+    if (formvalid1 == false || formvalid2 == false || formvalid3 == false || formvalid4 == false || formvalid5 == false) {
+      valid = false;
+    }
+
+    if (!formvalid1) {
+      document.getElementById('hide7').style.display = "block";
+      document.getElementById('error7').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid2) {
+      document.getElementById('hide25').style.display = "block";
+      document.getElementById('error25').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid3) {
+      document.getElementById('hide8').style.display = "block";
+      document.getElementById('error8').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid4) {
+      document.getElementById('hide9').style.display = "block";
+      document.getElementById('error9').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid5) {
+      document.getElementById('hide10').style.display = "block";
+      document.getElementById('error10').style.backgroundColor = "#ffdddd";
+    }
+
+    if (valid == true && document.getElementById("pred1").checked) {
+        form_seq = [0,1,2,3,4,5,6,7,8,9,11];
+    }
+
+    if (valid == true && document.getElementById("pred2").checked) {
+        form_seq = [0,1,2,8,9,10,11];
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid;
+
+  }
+
+  if(currentTab == 3) {
+    var radios1 = document.getElementsByName("sem_det");
+    var formvalid1 = false;
+    var i = 0;
+    while (!formvalid1 && i < radios1.length) {
+        if (radios1[i].checked) formvalid1 = true;
+        i++;
+      }
+    var radios2 = document.getElementsByName("class_stu");
+    var formvalid2 = false;
+    var j = 0;
+    while (!formvalid2 && j < radios2.length) {
+        if (radios2[j].checked) formvalid2 = true;
+        j++;
+      }
+
+      if (!formvalid1) {
+        document.getElementById('hide11').style.display = "block";
+        document.getElementById('error11').style.backgroundColor = "#ffdddd";
+      }
+
+    if (formvalid1 == true && formvalid2 == true) {
+      if (document.getElementById("class_stu1").checked) {
+        form_req = [0,1,2,3,4,8,9,10,11];
+      }
+      if (document.getElementById("class_stu2").checked || document.getElementById("class_stu3").checked || document.getElementById("class_stu4").checked || document.getElementById("class_stu5").checked || document.getElementById("class_stu6").checked) {
+        form_req = [0,1,2,3,5,6,7,8,9,10,11];
+      }
+    }
+
+    if(formvalid1 == true && formvalid2 == false) {
+      if (document.getElementById("sem_det1").checked || document.getElementById("sem_det2").checked || document.getElementById("sem_det3").checked || document.getElementById("sem_det4").checked || document.getElementById("sem_det5").checked) {
+        form_req = [0,1,2,3,4,8,9,11];
+      }
+    }
+
+    if (formvalid1) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return formvalid1;
+  }
+
+  if(currentTab == 4) {
+    if (true) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+
+    return true;
+  }
+
+  if (currentTab == 5) {
+    var valid = true;
+    var text1 = document.getElementById("eng1_marks1");
+    var formvalid1 = true;
+    if(text1.value == "" || text1.value.length == 0) {
+      formvalid1 = false;
+    }
+    var text2 = document.getElementById("eng2_marks1")
+    var formvalid2 = true;
+    if(text2.value == "" || text2.value.length == 0) {
+      formvalid2 = false;
+    }
+    var text3 = document.getElementById("mat_marks1");
+    var formvalid3 = true;
+    if(text3.value == "" || text3.value.length == 0) {
+      formvalid3 = false;
+    }
+    var text4 = document.getElementById("soc_marks1")
+    var formvalid4 = true;
+    if(text4.value == "" || text4.value.length == 0) {
+      formvalid4 = false;
+    }
+
+    if(formvalid1 == false || formvalid2 == false || formvalid3 == false || formvalid4 == false) {
+      valid = false;
+    }
+
+    if (!formvalid1) {
+      document.getElementById('hide12').style.display = "block";
+      document.getElementById('error12').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid2) {
+      document.getElementById('hide13').style.display = "block";
+      document.getElementById('error13').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid3) {
+      document.getElementById('hide14').style.display = "block";
+      document.getElementById('error14').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid4) {
+      document.getElementById('hide15').style.display = "block";
+      document.getElementById('error15').style.backgroundColor = "#ffdddd";
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid;
+  }
+
+  if(currentTab == 6) {
+    var radios1 = document.getElementsByName("add");
+    var formvalid1 = false;
+    var i = 0;
+    while (!formvalid1 && i < radios1.length) {
+        if (radios1[i].checked) formvalid1 = true;
+        i++;
+      }
+    if (formvalid1 == true) {
+      if (document.getElementById("add1").checked) {
+        form_req = [0,1,2,3,5,6,7,8,9,11];
+      }
+      if (document.getElementById("add2").checked) {
+        form_req = [0,1,2,3,5,6,8,9,11];
+      }
+    }
+
+    if (!formvalid4) {
+      document.getElementById('hide16').style.display = "block";
+      document.getElementById('error16').style.backgroundColor = "#ffdddd";
+    }
+
+    if (formvalid1) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return formvalid1;
+  }
+
+  if(currentTab == 7) {
+    if (true) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return true;
+  }
+
+  if (currentTab == 8) {
+    var text1 = document.getElementById("num_2");
+    var formvalid1 = true;
+    if(text1.value == "" || text1.value.length == 0) {
+      formvalid1 = false;
+    }
+
+    if (!formvalid1) {
+      document.getElementById('hide17').style.display = "block";
+      document.getElementById('error17').style.backgroundColor = "#ffdddd";
+    }
+
+    if (formvalid1) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return formvalid1;
+
+  }
+
+  if (currentTab == 9) {
+    var valid = true;
+    var radios1 = document.getElementsByName("health");
+    var formvalid1 = false;
+    var i = 0;
+    while (!formvalid1 && i < radios1.length) {
+        if (radios1[i].checked) formvalid1 = true;
+        i++;
+      }
+    var radios2 = document.getElementsByName("study_time");
+    var formvalid2 = false;
+    var j = 0;
+    while (!formvalid2 && j < radios2.length) {
+        if (radios2[j].checked) formvalid2 = true;
+        j++;
+    }
+    var radios3 = document.getElementsByName("play");
+    var formvalid3 = false;
+    var k = 0;
+    while (!formvalid3 && k < radios3.length) {
+        if (radios3[k].checked) formvalid3 = true;
+        k++;
+    }
+    var radios5 = document.getElementsByName("skip");
+    var formvalid5 = false;
+    var l = 0;
+    while (!formvalid5 && l < radios5.length) {
+        if (radios5[l].checked) formvalid5 = true;
+        l++;
+    }
+    var text1 = document.getElementById("extra_cur");
+    var formvalid6 = true;
+    if(text1.value == "" || text1.value.length == 0) {
+      formvalid6 = false;
+    }
+    if (formvalid1 == false || formvalid2 == false || formvalid3 == false || formvalid5 == false || formvalid6 == false) {
+      valid = false;
+    }
+
+    if (!formvalid1) {
+      document.getElementById('hide18').style.display = "block";
+      document.getElementById('error18').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid2) {
+      document.getElementById('hide19').style.display = "block";
+      document.getElementById('error19').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid3) {
+      document.getElementById('hide20').style.display = "block";
+      document.getElementById('error20').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid5) {
+      document.getElementById('hide21').style.display = "block";
+      document.getElementById('error21').style.backgroundColor = "#ffdddd";
+    }
+    if (!formvalid6) {
+      document.getElementById('hide22').style.display = "block";
+      document.getElementById('error22').style.backgroundColor = "#ffdddd";
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid;
+
+  }
+
+  if (currentTab == 10) {
+    if (true) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return true;
+  }
+
+  if (currentTab == 11) {
+    valid = true;
+    var formvalid3 = false;
+    var text1 = document.getElementById("email1");
+    var formvalid1 = true;
+    if(text1.value == "" || text1.value.length == 0) {
+      formvalid1 = false;
+    }
+
+    var text2 = document.getElementById("answer1");
+    var formvalid2 = true;
+    if(text2.value == "" || text2.value.length == 0) {
+      formvalid2 = false;
+    }
+
+    if (document.getElementById('answer1').value == 10) {
+      formvalid3 = true;
+    }
+
+    if (!formvalid1) {
+      document.getElementById('hide23').style.display = "block";
+      document.getElementById('error23').style.backgroundColor = "#ffdddd";
+    }
+
+    if (!formvalid2) {
+      document.getElementById('hide24').style.display = "block";
+      document.getElementById('error24').style.backgroundColor = "#ffdddd";
+    }
+
+    if (formvalid2 && !formvalid3) {
+      document.getElementById('hide26').style.display = "block";
+      document.getElementById('error24').style.backgroundColor = "#ffdddd";
+    }
+
+    if(formvalid1 == false || formvalid2 == false || formvalid3 == false) {
+      valid = false;
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid;
+  }
+
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>
+
+</body>
+
+</html>
